@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Tomato Grotesk";
+  src: url("/fonts/TomatoGrotesk-Bold.otf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Tomato Grotesk";
+  src: url("/fonts/TomatoGrotesk-SemiBold.otf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Tomato Grotesk";
+  src: url("/fonts/TomatoGrotesk-Medium.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Tomato Grotesk";
+  src: url("/fonts/TomatoGrotesk-Regular.otf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Tomato Grotesk";
+  src: url("/fonts/TomatoGrotesk-Light.otf");
+  font-weight: 300;
+}
+* {
+  font-family: "Tomato Grotesk";
+  accent-color: red !important;
+}
+h1 {
+  font-weight: 700;
+  line-height: 120%;
+}
+h2 {
+  font-weight: 600;
+  line-height: 120%;
+}
+h3 {
+  font-weight: 500;
+  line-height: 150%;
+}
+h4,
+p {
+  font-weight: 400;
+  line-height: 150%;
+  
+}
+h5 {
+  font-weight: 300;
+  line-height: 150%;
+}
+
+@layer base {
+  body {
+    @apply bg-light-400 text-dark-600;
+  }
+}
+@layer components {
+  input {
+    @apply outline-none bg-transparent;
+  }
+  select {
+    @apply outline-none bg-transparent accent-primary-800 font-medium;
+  }
+  option:hover {
+    @apply accent-primary-800;
+  }
+}
