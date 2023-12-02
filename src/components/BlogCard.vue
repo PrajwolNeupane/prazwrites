@@ -12,7 +12,7 @@
     <div class="flex flex-col gap-2 p-2">
       <h2 class="text-dark-600 text-rg">
         {{ blog.title }}
-      </h2>
+    </h2>
       <h4 class="text-dark-400 leading-[120%]">
         {{ blog.short_description }}
       </h4>
@@ -20,7 +20,7 @@
         <h4>{{ blog.date }}</h4>
         <h4>·</h4>
         <h4>
-          <!-- {{ getTime({ title: blog.title, description: blog.description }) }} -->
+          {{ getTime({ title: blog.title, description: blog.description }) }}
           min read
         </h4>
         <h4>·</h4>
@@ -34,6 +34,7 @@
 
 <script lang="ts">
 export default {
+  inject: ["getTime"],
   props: {
     blogs: {
       type: Array<{

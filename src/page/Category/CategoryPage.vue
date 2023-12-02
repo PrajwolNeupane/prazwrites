@@ -4,8 +4,17 @@ import BlogCard from "../../components/BlogCard.vue";
 </script>
 
 <template>
-  <div class="flex flex-wrap px-[8%] py-10 gap-5">
-    <BlogCard :blogs="blogs_filtered" />
+  <div v-if="blogs_filtered.length != 0">
+    <div class="flex px-[8%] pt-10 items-center gap-3">
+      <h2 class="text-lg">{{ categoryTitle }} Blogs</h2>
+      <h3 class="text-md">({{ blogs_filtered.length }})</h3>
+    </div>
+    <div class="flex flex-wrap px-[8%] py-10 gap-5">
+      <BlogCard :blogs="blogs_filtered" />
+    </div>
+  </div>
+  <div v-else class="flex items-center justify-center min-h-[85vh]">
+    <h2 class="text-lg">No {{ categoryTitle }} Blogs</h2>
   </div>
 </template>
 
@@ -14,6 +23,7 @@ export default {
   data() {
     return {
       blogs_filtered: [{}],
+      categoryTitle: "",
     } as {
       blogs_filtered: {
         slug: string;
@@ -24,10 +34,12 @@ export default {
         image: string;
         category: string;
       }[];
+      categoryTitle: string;
     };
   },
   methods: {
     findCategoryBlog(category: string) {
+      this.categoryTitle = category;
       this.blogs_filtered = blogs.filter((curr) => {
         if (curr.category == category) {
           return curr;
