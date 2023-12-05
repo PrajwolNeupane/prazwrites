@@ -12,7 +12,7 @@
     <div class="flex flex-col gap-2 p-2">
       <h2 class="text-dark-600 text-rg">
         {{ blog.title }}
-    </h2>
+      </h2>
       <h4 class="text-dark-400 leading-[120%]">
         {{ blog.short_description }}
       </h4>
@@ -33,6 +33,7 @@
 </template>
 
 <script lang="ts">
+import { inject } from "vue";
 export default {
   inject: ["getTime"],
   props: {
@@ -47,6 +48,16 @@ export default {
         category: string;
       }>,
     },
+  },
+  setup(props) {
+    const getTime = inject("getTime") as (data: {
+      title: string;
+      description: string[];
+    }) => number;
+    return {
+      getTime,
+      props,
+    };
   },
 };
 </script>

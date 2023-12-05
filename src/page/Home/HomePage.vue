@@ -48,13 +48,10 @@ export default {
   },
   watch: {
     blogSearch: {
-      handler: (newValue: string) => {
-        console.log(newValue);
-        if (newValue) {
-          alert(newValue)
+      handler: function (newValue: string) {
+        if (newValue && this != undefined) {
           this.search = newValue;
         }
-        // this.setBlog(newValue);
       },
       deep: true,
       immediate: true,
