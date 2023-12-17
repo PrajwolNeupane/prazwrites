@@ -1,3 +1,6 @@
+<script lang="ts" setup>
+import TextLiner from "../../components/TextLiner.vue";
+</script>
 <template>
   <div class="flex flex-col items-start px-[8%] py-10 gap-3">
     <h3 class="bg-primary-400 px-2 py-1 rounded-lg text-xs">
@@ -23,15 +26,16 @@
       :src="blog_data.image"
       class="w-full h-[45vh] object-contain sm:mb-5 mb-0"
     />
-    <p class="text-rg" v-for="description in blog_data.description">
-      {{ description }}
-    </p>
+    <TextLiner
+      :description="description"
+      v-for="description in blog_data.description"
+    />
   </div>
 </template>
 
 <script lang="ts">
+import "prismjs/themes/prism.css";
 import BlogList from "../../const/BlogList";
-
 export default {
   data() {
     return {

@@ -3,11 +3,11 @@ import CategoryList from "../const/CategoryList.ts";
 </script>
 <template>
   <div
-    class="flex sm:flex-row flex-col sm:gap-0 gap-3 py-5 px-[8%] bg-light-200 items-center justify-between sticky top-0"
+    class="flex sm:flex-row flex-col sm:gap-0 gap-3 py-5 px-[8%] bg-light-200 items-center justify-between sticky top-0 z-50"
   >
     <h1 class="text-xl text-dark-800">Prazwrites</h1>
     <div class="md:flex hidden border-[2px] border-[gray] w-1/3 p-2 rounded-md">
-      <input class="w-full" placeholder="Search blogs" v-model="blogSearch"/>
+      <input class="w-full" placeholder="Search blogs" v-model="blogSearch" />
     </div>
     <div class="flex sm:gap-[60px] gap-[30px]">
       <router-link to="/" class="text-sm text-dark-600 font-medium"
@@ -37,13 +37,13 @@ export default {
   data() {
     return {
       currentCategory: "",
-      blogSearch:""
+      blogSearch: "",
     };
   },
-  provide(){
+  provide() {
     return {
-      blogSearch:this.blogSearch
-    }
+      blogSearch: this.blogSearch,
+    };
   },
   created() {
     if (this.$route.params.category) {
