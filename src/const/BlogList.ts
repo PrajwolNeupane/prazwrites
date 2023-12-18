@@ -9,6 +9,140 @@ const BlogList: {
 }[] = [
   {
     image:
+      "https://logicmojo.com/assets/dist/new_pages/images/cstructure-intro.png",
+    slug: "structure-in-c",
+    title: "Strucures in C",
+    date: "Dec 18",
+    category: "DSA",
+    short_description:
+      "A structure in C is a user-defined data type that allows you to group variables of different data types under a single name. It enables the creation of a composite data type....",
+    description: [
+      "<h2>Structure in C:</h2>",
+      "A structure in C is a user-defined data type that allows you to group variables of different data types under a single name. It enables the creation of a composite data type.",
+      "<h3>1. Declaration of Structure:</h3>",
+      "Declare a structure to define its blueprint. Use the struct keyword followed by the structure name and a list of members inside curly braces.",
+      `<code>struct Point {
+        int x;
+        int y;
+      };</code>`,
+      `<code>struct Student {
+        int rollNumber;
+        char name[50];
+        float marks;
+      };</code>`,
+      "<h3>2. Array of Structure:</h3>",
+      "Create an array where each element is a structure. It allows you to store multiple instances of the structure in a contiguous memory block.",
+      `<code>struct StudentClass {
+        struct Student students[50];
+      };</code>`,
+      "<h3>3. Structure of Structure:</h3>",
+      "A structure can contain another structure as its member. This concept is known as a structure of structure or nested structure.",
+      `<code>struct Address {
+        char street[50];
+        char city[30];
+      };
+      
+      struct Employee {
+        char name[50];
+        struct Address empAddress;
+      };</code>`,
+      "<h3>4. Structure of Function:</h3>",
+      "In C, you can have a structure that contains a function pointer as one of its members. This is known as a structure of function.",
+      `<code>typedef int (*Operation)(int, int);
+
+      struct Calculator {
+        Operation add;
+        Operation subtract;
+      };</code>`,
+      "The Operation type represents a function pointer, and the structure Calculator contains function pointers for addition and subtraction operations.",
+    ],
+  },
+  {
+    image:
+      "https://res.cloudinary.com/practicaldev/image/fetch/s--UMA1leOC--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tyy18njsjbpefb08gjrn.png",
+    slug: "computed-property-on-vuejs",
+    title: "What is Computed Property on Vue.js ?",
+    date: "Dec 17",
+    category: "Web Frontend",
+    short_description:
+      "In Vue.js, a computed property is a special type of property that is calculated based on one or more existing data properties. Computed properties are particularly useful for performing complex or derived calculations and for keeping the template code clean...",
+    description: [
+      "In <h2>Vue.js</h2>, a computed property is a special type of property that is calculated based on one or more existing data properties. Computed properties are particularly useful for performing complex or derived calculations and for keeping the template code clean.",
+      "Here's an explanation of computed properties in Vue.js:",
+      "<h3>1. Declaration</h3>",
+      "To define a computed property, you use the computed option in the component's options or the computed property if you are using the Composition API.",
+      "A function that allows you to update the state.",
+      `<code>// Options API
+     export default {
+       data() {
+         return {
+           length: 5,
+           width: 10,
+         };
+       },
+       computed: {
+         area() {
+           return this.length * this.width;
+         },
+       },
+     };</code>`,
+      `<code>// Composition API
+      import { ref, computed } from 'vue';
+      
+      export default {
+        setup() {
+          const length = ref(5);
+          const width = ref(10);
+      
+          const area = computed(() => length.value * width.value);
+      
+          return { length, width, area };
+        },
+      };</code>`,
+      "<h3>2. Usage in Templates:</h3>",
+      "Once you have defined a computed property, you can use it in your template just like any other property:",
+      `<code><template>
+      <div>
+        <p>Length: {{ length }}</p>
+        <p>Width: {{ width }}</p>
+        <p>Area: {{ area }}</p>
+      </div>
+    </template></code>`,
+      "In the example above, area is a computed property that is automatically updated whenever length or width changes.",
+      "<h3>3. Caching:</h3>",
+      "Computed properties are cached based on their dependencies. Vue.js automatically tracks the dependencies used in the computed property, and it only recomputes the value when one of the dependencies changes. This helps improve performance by avoiding unnecessary recalculations.",
+      "<h3>4. Setter Function (Two-Way Computed):</h3>",
+      "Computed properties can also have a setter function, allowing you to update the underlying data properties when the computed property is modified:",
+      `<code>// Options API
+      computed: {
+        fullName: {
+          get() {
+            return this.firstName + ' ' + this.lastName;
+          },
+          set(value) {
+            const parts = value.split(' ');
+            this.firstName = parts[0];
+            this.lastName = parts[1];
+          },
+        },
+      }</code>`,
+      `<code>// Composition API
+      const fullName = computed({
+        get() {
+          return firstName.value + ' ' + lastName.value;
+        },
+        set(value) {
+          const parts = value.split(' ');
+          firstName.value = parts[0];
+          lastName.value = parts[1];
+        },
+      });</code>`,
+      "In this example, fullName is a computed property with both a getter and a setter.",
+      "Computed properties are a powerful feature in Vue.js, providing a clean and efficient way to work with derived data and manage complex calculations in your components.",
+    ],
+  },
+  {
+    image:
       "https://firebase.google.com/static/images/brand-guidelines/logo-built_black.png",
     slug: "what-is-firebase",
     title: "What is Firebase",
