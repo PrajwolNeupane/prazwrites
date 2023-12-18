@@ -9,6 +9,58 @@ const BlogList: {
 }[] = [
   {
     image:
+      "https://res.cloudinary.com/practicaldev/image/fetch/s--8zpnP7e8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/vugz15i3sz2asv64clw3.jpg",
+    slug: "promises-in-javascript",
+    title: "Promises in JavaScript",
+    date: "Dec 18",
+    category: "Web Frontend",
+    short_description:
+      "Promises in JavaScript are a way to handle asynchronous operations more easily and manage their results, especially when dealing with functions that return data over time, such as fetching data from an API, reading a file, or making network requests...",
+    description: [
+      "<h2>Promises in JavaScript</h2>",
+      "Promises in JavaScript are a way to handle asynchronous operations more easily and manage their results, especially when dealing with functions that return data over time, such as fetching data from an API, reading a file, or making network requests.",
+      "Here's a beginner-friendly explanation of promises:",
+      "<h3>1. Definition</h3>",
+      "A promise is an object that represents the eventual completion or failure of an asynchronous operation and its resulting value.",
+      "<h3>2. States:</h3>",
+      "A promise can be in one of three states:",
+      "Pending: The initial state. The operation is still in progress.",
+      "Fulfilled: The operation completed successfully, and the promise has a resulting value.",
+      "Rejected: The operation failed, and the promise has a reason for the failure.",
+      "<h3>3. Creating a Promise:</h3>",
+      "You create a promise using the Promise constructor. It takes a function with two parameters: resolve and reject. Inside this function, you perform your asynchronous operation.",
+      `<code>const myPromise = new Promise((resolve, reject) => {
+        // Perform asynchronous operation
+        // If successful, call resolve with the result
+        // If there's an error, call reject with the reason
+      });</code>`,
+      "<h3>4. Handling Results:</h3>",
+      "You use the .then() method to handle the result when the promise is fulfilled and the .catch() method to handle errors when the promise is rejected.",
+      `<code>myPromise
+      .then((result) => {
+        // Handle the fulfilled result
+      })
+      .catch((error) => {
+        // Handle the rejected reason
+      });</code>`,
+      "<h3>5. Chaining Promises:</h3>",
+      "You can chain multiple asynchronous operations by returning a new promise from within a .then() block. This allows you to execute operations sequentially.",
+      `<code>myPromise
+      .then((result) => {
+        // Perform another asynchronous operation and return a new promise
+        return anotherAsyncOperation(result);
+      })
+      .then((newResult) => {
+        // Handle the result of the second operation
+      })
+      .catch((error) => {
+        // Handle any errors in the chain
+      });</code>`,
+      "Promises provide a cleaner and more structured way to work with asynchronous code compared to traditional callback patterns. They simplify error handling and make it easier to reason about the flow of asynchronous operations in your code.",
+    ],
+  },
+  {
+    image:
       "https://logicmojo.com/assets/dist/new_pages/images/cstructure-intro.png",
     slug: "structure-in-c",
     title: "Strucures in C",
@@ -268,38 +320,6 @@ const BlogList: {
       "In this example, useEffect is used to fetch data from an API after the initial render. The empty dependency array ([]) ensures that the effect runs only once after the initial render. You can include dependencies in the array to make the effect run whenever those dependencies change.",
       "The cleanup function is optional and is used for cleaning up resources or canceling subscriptions when the component is unmounted or updated.",
       "These hooks make it easier to manage state and side effects in functional components, allowing developers to write more concise and readable code.",
-    ],
-  },
-  {
-    image:
-      "https://miro.medium.com/v2/resize:fit:720/format:webp/1*f8bZ4XJGd60GW6qW5kLcUQ.jpeg",
-    slug: "the-no-homework-policy",
-    title: "The No Homework Policy. The No Homework Policy",
-    date: "Dec 4",
-    category: "Mobile Frontend",
-    short_description:
-      "An early experience in making my own rules came when I entered high school. An early experience in making my own rules...",
-    description: [
-      "An early experience in making my own rules came when I entered high school. In the first weeks of my freshman year, I tried to do everything right. I did what I was told to do — and this included my homework. After lacrosse practice and my after-school job at a local supermarket, I got home around 8:00p.m. Then I had to eat some dinner, do homework, and go to sleep so I could wake up and do it all over again.",
-      "For the first weeks, I forged ahead with this plan. There was a certain amount of reading for history class, problems to be solved for math, and similar nightly assignments from English, political science, chemistry, biology, and more. The workload added up, and wasn’t particularly fast at reading or math. But that first week, I was determined to get it all done.",
-      "I quickly discovered that trying to complete all the homework assigned to me meant staying up almost all night, every night. I couldn’t quit lacrosse — I’d founded the team and was its captain. And I needed my job in order to contribute to the family income.",
-      "So I decided the homework needed to go. My plan was simple. I would work as hard as possible to pay attention and be completely focused in each class, but I would not bring my books home, and I would not do any of the homework assigned to me. If the homework was intended to reinforce what was taught in class, I would be fine because I would make sure to absorb it all during the school day. Once I landed on this solution, a sense of relief washed over me. All that was left was the small matter of communicating my “No Homework Policy” to my teachers.",
-    ],
-  },
-  {
-    image:
-      "https://miro.medium.com/v2/resize:fit:720/format:webp/1*f8bZ4XJGd60GW6qW5kLcUQ.jpeg",
-    slug: "the-no-homework-policy",
-    title: "The No Homework Policy. The No Homework Policy",
-    date: "Dec 4",
-    category: "Mobile Frontend",
-    short_description:
-      "An early experience in making my own rules came when I entered high school. An early experience in making my own rules...",
-    description: [
-      "An early experience in making my own rules came when I entered high school. In the first weeks of my freshman year, I tried to do everything right. I did what I was told to do — and this included my homework. After lacrosse practice and my after-school job at a local supermarket, I got home around 8:00p.m. Then I had to eat some dinner, do homework, and go to sleep so I could wake up and do it all over again.",
-      "For the first weeks, I forged ahead with this plan. There was a certain amount of reading for history class, problems to be solved for math, and similar nightly assignments from English, political science, chemistry, biology, and more. The workload added up, and wasn’t particularly fast at reading or math. But that first week, I was determined to get it all done.",
-      "I quickly discovered that trying to complete all the homework assigned to me meant staying up almost all night, every night. I couldn’t quit lacrosse — I’d founded the team and was its captain. And I needed my job in order to contribute to the family income.",
-      "So I decided the homework needed to go. My plan was simple. I would work as hard as possible to pay attention and be completely focused in each class, but I would not bring my books home, and I would not do any of the homework assigned to me. If the homework was intended to reinforce what was taught in class, I would be fine because I would make sure to absorb it all during the school day. Once I landed on this solution, a sense of relief washed over me. All that was left was the small matter of communicating my “No Homework Policy” to my teachers.",
     ],
   },
   {
