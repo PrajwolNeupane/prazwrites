@@ -8,7 +8,36 @@ const BlogList: {
   category: string;
 }[] = [
   {
-    image: "https://nicholasmordecai.co.uk/wp-content/uploads/2020/10/typescript-generics-types.jpg",
+    image:
+      "https://i.ytimg.com/vi/A0W2n2azH5s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBWsG5QFnXJp9OC9z52_1rjVekiXQ",
+    slug: "reconciliation-in-react",
+    title: "Reconciliation in React",
+    date: "Dec 20",
+    category: "Web Frontend",
+    short_description:
+      "Reconciliation in React refers to the process of ensuring that the user interface (UI) remains consistent with the application state. When the state of a React component changes, React follows a series of...",
+    description: [
+      "<h2>Reconciliation</h2> in React refers to the process of ensuring that the user interface (UI) remains consistent with the application state. When the state of a React component changes, React follows a series of steps to update the actual DOM efficiently. Reconciliation is the algorithmic process that determines the most efficient way to apply these changes.",
+      "Here's an overview of the reconciliation process:",
+      "<h3>1. Render Virtual DOM:</h3>",
+      "When a component's state or props change, React re-renders the component and creates a new virtual DOM representation.",
+      "<h3>2. Determine Differences (Diffing):</h3>",
+      "React compares the new virtual DOM with the previous one to identify the differences (diffs) between them. This involves analyzing the structure and attributes of each element in the virtual DOM tree.",
+      "<h3>3. Generate Minimal Set of Changes:</h3>",
+      "React determines the most efficient way to update the actual DOM to reflect the changes in the virtual DOM. It calculates a minimal set of DOM manipulation instructions needed to bring the actual DOM in sync with the virtual DOM.",
+      "<h3>4. Batched Updates:</h3>",
+      "React batches multiple state changes and updates into a single transaction to avoid unnecessary re-renders and improve performance. This batching ensures that all changes are processed in a single update cycle",
+      "<h3>5. Reorder, Insert, or Remove DOM Elements:</h3>",
+      "React applies the calculated changes to the actual DOM. It efficiently reorders, inserts, or removes DOM elements to reflect the new state",
+      "<h3>6. Component Lifecycle Methods:</h3>",
+      "During the reconciliation process, React invokes certain component lifecycle methods, such as componentWillUpdate and componentDidUpdate, allowing developers to perform additional actions or optimizations.",
+      "Reconciliation is a key aspect of React's efficiency, as it prevents unnecessary updates and ensures that only the required changes are applied to the DOM. While React's diffing algorithm is highly optimized, developers can further enhance performance by following best practices, such as using keys for dynamic lists to help React identify elements more efficiently.",
+      "In summary, reconciliation is the process by which React intelligently updates the actual DOM based on changes in the virtual DOM, minimizing the impact on performance and ensuring a consistent UI.",
+    ],
+  },
+  {
+    image:
+      "https://nicholasmordecai.co.uk/wp-content/uploads/2020/10/typescript-generics-types.jpg",
     slug: "generics-in-typescript",
     title: "Generics in TypeScript",
     date: "Dec 19",
@@ -451,53 +480,3 @@ const BlogList: {
 ];
 
 export default BlogList;
-// Certainly! Here's another question:
-
-// **Question:**
-// Explain the concept of asynchronous programming in JavaScript, and how does it differ from synchronous programming? Provide an example scenario where asynchronous programming is beneficial, and discuss any potential challenges associated with it.
-
-// **Answer:**
-// - **Asynchronous Programming in JavaScript:**
-//   - Asynchronous programming in JavaScript allows tasks to be executed independently of the main program flow. It enables operations to start and finish without blocking the execution of the entire program.
-
-// - **Difference from Synchronous Programming:**
-//   - In synchronous programming, tasks are executed one after the other, and each task must complete before moving on to the next one. In contrast, asynchronous programming allows tasks to be initiated, and the program can continue executing other tasks while waiting for the asynchronous tasks to complete.
-
-// - **Example Scenario:**
-//   - Consider fetching data from an external API. In a synchronous approach, the program would halt until the data is retrieved. In an asynchronous approach using Promises or async/await, the program can continue executing other tasks while waiting for the API call to complete.
-
-//     ```javascript
-//     // Synchronous Example
-//     const data = fetchDataSync(); // This line blocks execution until data is fetched
-
-//     // Asynchronous Example (using async/await)
-//     try {
-//       const data = await fetchDataAsync(); // Program continues executing other tasks while waiting for data
-//       console.log(data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//     ```
-
-// - **Benefits of Asynchronous Programming:**
-//   1. **Improved Performance:**
-//      - Asynchronous operations prevent blocking, leading to improved performance, especially in scenarios involving I/O operations like network requests or file system operations.
-
-//   2. **Responsive User Interfaces:**
-//      - In web development, asynchronous programming is crucial for creating responsive user interfaces. UI elements can remain active while background tasks, such as data fetching, are in progress.
-
-// - **Challenges:**
-//   1. **Callback Hell:**
-//      - Asynchronous code can lead to callback hell, where multiple nested callbacks make the code hard to read and maintain. This is mitigated by using Promises or async/await syntax.
-
-//   2. **Error Handling:**
-//      - Error handling in asynchronous code can be challenging, and unhandled errors may lead to unexpected behavior. Proper error handling mechanisms are essential.
-
-// **Key Points:**
-// - Asynchronous programming allows tasks to execute independently, improving performance and responsiveness.
-// - It differs from synchronous programming, where tasks are executed sequentially.
-// - Promises and async/await are common constructs for managing asynchronous code.
-// - Asynchronous programming is beneficial in scenarios involving I/O operations.
-// - Challenges include callback hell and careful error handling.
-
-// This question assesses your understanding of asynchronous programming in JavaScript and its practical applications. Feel free to respond or seek clarification if needed!
