@@ -22,7 +22,9 @@ export default {
     };
   },
   computed: {
+    // @ts-ignore
     blogs_list() {
+      // @ts-ignore
       return this.$store.getters["blogs/blogs"] as {
         slug: string;
         title: string;
@@ -31,16 +33,21 @@ export default {
         date: string;
         image: string;
         category: string;
+        readDuration: number;
       }[];
     },
   },
   methods: {
     async fetchBlogs() {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/blog/all`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_API_URL}/blog/all`
+        );
         if (response.status == 200) {
+          // @ts-ignore
           this.$store.dispatch("blogs/setBlogs", response.data);
-        }else{
+        } else {
+          // @ts-ignore
           this.$store.dispatch("blogs/setBlogs", []);
         }
       } catch (e) {

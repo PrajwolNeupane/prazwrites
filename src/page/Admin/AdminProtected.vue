@@ -7,6 +7,7 @@ import axios from "axios";
 export default {
   computed: {
     isAdmin(): boolean {
+      // @ts-ignore
       return this.$store.getters["admin/isAdmin"] as boolean;
     },
   },
@@ -29,12 +30,15 @@ export default {
         const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/auth/`, {
           withCredentials: true,
         });
+        // @ts-ignore
         this.$store.dispatch("admin/setAdmin", {
           ...res.data.user,
           isAdmin: true,
         });
+        // @ts-ignore
         this.isAdmin = this.$store.getters["admin/isAdmin"];
       } catch (e: any) {
+        // @ts-ignore
         this.$store.dispatch("admin/setAdmin", {
           id: null,
           email: null,

@@ -10,6 +10,7 @@ export default {
     };
   },
   mounted() {
+    // @ts-ignore
     this.isAdmin = this.$store.getters["admin/isAdmin"];
   },
 };

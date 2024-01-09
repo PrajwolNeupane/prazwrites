@@ -36,7 +36,9 @@ export default {
       date: string;
       image: string;
       category: string;
+      readDuration: number;
     }[] {
+      // @ts-ignore
       return this.$store.getters["blogs/categoryBlogs"] as {
         slug: string;
         title: string;
@@ -45,9 +47,11 @@ export default {
         date: string;
         image: string;
         category: string;
+        readDuration: number;
       }[];
     },
     category: function category(): string {
+      // @ts-ignore
       return this.$store.getters["blogs/category"] as string;
     },
   },
@@ -59,6 +63,7 @@ export default {
           `${import.meta.env.VITE_APP_API_URL}/category/${category}`
         );
         if (response.status == 200) {
+          // @ts-ignore
           this.$store.dispatch("blogs/setCategoryBlogs", {
             blogs: response.data.blogs,
             category: category,
