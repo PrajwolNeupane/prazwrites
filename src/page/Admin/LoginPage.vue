@@ -59,7 +59,7 @@ export default {
     logIn: async function logIn() {
       try {
         const res = await axios.post(
-          "http://localhost:8000/auth/signin",
+          `${import.meta.env.VITE_APP_API_URL}/auth/signin`,
           {
             ...this.values,
           },

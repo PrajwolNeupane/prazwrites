@@ -53,7 +53,7 @@ export default {
   methods: {
     async fetchSingleBlog(slug: string) {
       try {
-        const response = await axios.get(`http://localhost:8000/blog/${slug}`);
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/blog/${slug}`);
         if (response.status == 200) {
           const blog = response.data.blog;
           this.blog_data = {

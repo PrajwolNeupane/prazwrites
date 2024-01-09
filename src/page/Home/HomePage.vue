@@ -37,7 +37,7 @@ export default {
   methods: {
     async fetchBlogs() {
       try {
-        const response = await axios.get("http://localhost:8000/blog/all");
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/blog/all`);
         if (response.status == 200) {
           this.$store.dispatch("blogs/setBlogs", response.data);
         }else{

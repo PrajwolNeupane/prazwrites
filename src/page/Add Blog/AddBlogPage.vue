@@ -158,7 +158,7 @@ export default {
                 .filter(Boolean),
             };
             const res = await axios.post(
-              "http://localhost:8000/blog/add",
+              `${import.meta.env.VITE_APP_API_URL}/blog/add`,
               data,
               {
                 withCredentials: true,

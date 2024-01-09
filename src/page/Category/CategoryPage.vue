@@ -28,7 +28,15 @@ export default {
     };
   },
   computed: {
-    category_blog_list() {
+    category_blog_list(): {
+      slug: string;
+      title: string;
+      short_description: string;
+      description: string[];
+      date: string;
+      image: string;
+      category: string;
+    }[] {
       return this.$store.getters["blogs/categoryBlogs"] as {
         slug: string;
         title: string;
@@ -39,13 +47,16 @@ export default {
         category: string;
       }[];
     },
+    category: function category(): string {
+      return this.$store.getters["blogs/category"] as string;
+    },
   },
   methods: {
     async findCategoryBlog(category: string) {
       this.categoryTitle = category;
       try {
         const response = await axios.get(
-          `http://localhost:8000/blog/category/${category}`
+          `${import.meta.env.VITE_APP_API_URL}/category/${category}`
         );
         if (response.status == 200) {
           this.$store.dispatch("blogs/setCategoryBlogs", {
