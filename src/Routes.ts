@@ -3,6 +3,10 @@ import NavBarVue from "./components/NavBar.vue";
 import HomePageVue from "./page/Home/HomePage.vue";
 import BlogPageVue from "./page/Blog/BlogPage.vue";
 import CategoryPageVue from "./page/Category/CategoryPage.vue";
+import AddBlogPageVue from "./page/Add Blog/AddBlogPage.vue";
+import LoginPageVue from "./page/Admin/LoginPage.vue";
+import AdminPageVue from "./page/Admin/AdminPage.vue";
+import AdminProtectedVue from "./page/Admin/AdminProtected.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +26,24 @@ const router = createRouter({
         {
           path: "/category/:category",
           component: CategoryPageVue,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      component: AdminProtectedVue,
+      children: [
+        {
+          path: "/admin",
+          component: AdminPageVue,
+        },
+        {
+          path: "/admin/login",
+          component: LoginPageVue,
+        },
+        {
+          path: "/admin/addblog",
+          component: AddBlogPageVue,
         },
       ],
     },

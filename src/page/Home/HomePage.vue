@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import blogs from "../../const/BlogList";
 import BlogCard from "../../components/BlogCard.vue";
 </script>
 
@@ -11,14 +10,20 @@ import BlogCard from "../../components/BlogCard.vue";
 </template>
 
 <script lang="ts">
+import axios from "axios";
+
 export default {
   inject: ["blogSearch"],
   data() {
     return {
-      blogs_list: [{}],
       search: "",
     } as {
-      blogs_list: {
+      search: string;
+    };
+  },
+  computed: {
+    blogs_list() {
+      return this.$store.getters["blogs/blogs"] as {
         slug: string;
         title: string;
         short_description: string;
@@ -27,35 +32,24 @@ export default {
         image: string;
         category: string;
       }[];
-      search: string;
-    };
+    },
   },
   methods: {
-    setBlog(search: string) {
-      if (search) {
-        this.blogs_list = blogs.filter((curr) => {
-          if (curr.title.toLowerCase().includes(search.toLowerCase())) {
-            return curr;
-          }
-        });
-      } else {
-        this.blogs_list = blogs;
+    async fetchBlogs() {
+      try {
+        const response = await axios.get("http://localhost:8000/blog/all");
+        if (response.status == 200) {
+          this.$store.dispatch("blogs/setBlogs", response.data);
+        }else{
+          this.$store.dispatch("blogs/setBlogs", []);
+        }
+      } catch (e) {
+        console.log(e);
       }
     },
   },
-  created() {
-    this.setBlog("");
-  },
-  watch: {
-    blogSearch: {
-      handler: function (newValue: string) {
-        if (newValue && this != undefined) {
-          this.search = newValue;
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
+  mounted() {
+    this.fetchBlogs();
   },
 };
 </script>

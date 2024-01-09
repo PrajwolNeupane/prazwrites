@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import blogs from "../../const/BlogList";
 import BlogCard from "../../components/BlogCard.vue";
+import axios from "axios";
 </script>
 
 <template>
-  <div v-if="blogs_filtered.length != 0">
+  <div v-if="category_blog_list.length != 0">
     <div class="flex px-[8%] pt-10 items-center gap-3">
       <h2 class="text-lg">{{ categoryTitle }} Blogs</h2>
-      <h3 class="text-md">({{ blogs_filtered.length }})</h3>
+      <h3 class="text-md">({{ category_blog_list.length }})</h3>
     </div>
     <div class="flex flex-wrap px-[8%] py-10 gap-5">
-      <BlogCard :blogs="blogs_filtered" />
+      <BlogCard :blogs="category_blog_list" />
     </div>
   </div>
   <div v-else class="flex items-center justify-center min-h-[85vh]">
@@ -22,10 +22,14 @@ import BlogCard from "../../components/BlogCard.vue";
 export default {
   data() {
     return {
-      blogs_filtered: [{}],
       categoryTitle: "",
     } as {
-      blogs_filtered: {
+      categoryTitle: string;
+    };
+  },
+  computed: {
+    category_blog_list() {
+      return this.$store.getters["blogs/categoryBlogs"] as {
         slug: string;
         title: string;
         short_description: string;
@@ -34,17 +38,24 @@ export default {
         image: string;
         category: string;
       }[];
-      categoryTitle: string;
-    };
+    },
   },
   methods: {
-    findCategoryBlog(category: string) {
+    async findCategoryBlog(category: string) {
       this.categoryTitle = category;
-      this.blogs_filtered = blogs.filter((curr) => {
-        if (curr.category == category) {
-          return curr;
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/blog/category/${category}`
+        );
+        if (response.status == 200) {
+          this.$store.dispatch("blogs/setCategoryBlogs", {
+            blogs: response.data.blogs,
+            category: category,
+          });
         }
-      });
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
   created() {

@@ -34,8 +34,9 @@ import TextLiner from "../../components/TextLiner.vue";
 </template>
 
 <script lang="ts">
+import moment from "moment";
 import "prismjs/themes/prism.css";
-import BlogList from "../../const/BlogList";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -50,16 +51,33 @@ export default {
     };
   },
   methods: {
-    fetchSingleBlog(slug: string) {
-      this.blog_data = BlogList.filter((curr) => {
-        if (curr.slug == slug) {
-          return curr;
+    async fetchSingleBlog(slug: string) {
+      try {
+        const response = await axios.get(`http://localhost:8000/blog/${slug}`);
+        if (response.status == 200) {
+          const blog = response.data.blog;
+          this.blog_data = {
+            title: blog.title,
+            image: blog.image,
+            description: blog.description?.filter(
+              (desc: string, index: number) => {
+                if (index != 0) {
+                  return desc;
+                }
+              }
+            ),
+            category: blog.tags,
+            slug: blog._id,
+            date: moment(blog?.createdAt).format("MMM D, YYYY"),
+          };
         }
-      })[0];
+      } catch (e) {
+        console.log(e);
+      }
     },
     getTime({ title, description }: { title: string; description: string[] }) {
       return Math.floor(
-        (title.split(" ").length + description.join(" ").split(" ").length) /
+        (title?.split(" ").length + description?.join(" ").split(" ").length) /
           150
       );
     },

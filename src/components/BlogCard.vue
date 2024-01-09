@@ -1,6 +1,6 @@
 <template>
   <RouterLink
-    :to="'blog/' + blog.slug"
+    :to="'/blog/' + blog.title"
     class="flex items-start sm:flex-row flex-col md:w-[calc(50%-10px)] w-full hover:bg-light-200 gap-2 cursor-pointer mb-5"
     v-for="blog in blogs"
     :key="blog.slug"
@@ -20,7 +20,7 @@
         <h4>{{ blog.date }}</h4>
         <h4>·</h4>
         <h4>
-          {{ getTime({ title: blog.title, description: blog.description }) }}
+          {{ blog.readDuration }}
           min read
         </h4>
         <h4>·</h4>
@@ -33,9 +33,7 @@
 </template>
 
 <script lang="ts">
-import { inject } from "vue";
 export default {
-  inject: ["getTime"],
   props: {
     blogs: {
       type: Array<{
@@ -46,18 +44,9 @@ export default {
         date: string;
         image: string;
         category: string;
+        readDuration: number;
       }>,
     },
-  },
-  setup(props) {
-    const getTime = inject("getTime") as (data: {
-      title: string;
-      description: string[];
-    }) => number;
-    return {
-      getTime,
-      props,
-    };
   },
 };
 </script>

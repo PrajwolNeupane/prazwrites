@@ -69,4 +69,7 @@ h5 {
   option:hover {
     @apply accent-primary-800;
   }
+  .error{
+    @apply text-red-600
+  }
 }
