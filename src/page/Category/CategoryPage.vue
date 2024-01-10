@@ -60,7 +60,7 @@ export default {
       this.categoryTitle = category;
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_URL}/category/${category}`
+          `${import.meta.env.VITE_APP_API_URL}/blog/category/${category}`
         );
         if (response.status == 200) {
           // @ts-ignore
