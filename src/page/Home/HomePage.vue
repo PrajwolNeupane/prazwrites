@@ -17,8 +17,14 @@ export default {
   data() {
     return {
       search: "",
+      page: 1,
+      totalBlogs: -1,
+      limit: 6,
     } as {
       search: string;
+      page: number;
+      totalBlogs: number;
+      limit: number;
     };
   },
   computed: {
@@ -41,11 +47,16 @@ export default {
     async fetchBlogs() {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_URL}/blog/all`
+          `${import.meta.env.VITE_APP_API_URL}/blog/all?blogs=${
+            this.page * this.limit
+          }`
         );
         if (response.status == 200) {
+          // Append newly fetched data to the existing data list
+          this.totalBlogs = response.data.totalBlogs;
           // @ts-ignore
-          this.$store.dispatch("blogs/setBlogs", response.data);
+          this.$store.dispatch("blogs/setBlogs", response.data.blogs);
+          this.page++; // Increment page number for the next request
         } else {
           // @ts-ignore
           this.$store.dispatch("blogs/setBlogs", []);
@@ -57,6 +68,26 @@ export default {
   },
   mounted() {
     this.fetchBlogs();
+    window.addEventListener("scroll", () => {
+      const offset = 100; // Adjust this value as needed
+      const bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight + offset >=
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow && this.blogs_list.length < this.totalBlogs) {
+        this.fetchBlogs();
+      }
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", () => {
+      const offset = 100; // Adjust this value as needed
+      const bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight + offset >=
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow && this.blogs_list.length < this.totalBlogs) {
+        this.fetchBlogs();
+      }
+    });
   },
 };
 </script>

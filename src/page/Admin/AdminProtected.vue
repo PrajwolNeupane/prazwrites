@@ -27,7 +27,7 @@ export default {
   methods: {
     async getAdmin() {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/auth/`, {
+        const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/auth`, {
           withCredentials: true,
         });
         // @ts-ignore

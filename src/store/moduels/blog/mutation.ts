@@ -14,6 +14,22 @@ export default {
   ) {
     state.blogList = payload;
   },
+  appendBlogs(
+    state: any,
+    payload: {
+      slug: string;
+      title: string;
+      short_description: string;
+      description: string[];
+      date: string;
+      image: string;
+      category: string;
+      readDuration: number;
+    }[]
+  ) {
+    const blogs = state.blogList;
+    state.blogList = blogs.concat(payload);
+  },
   setCategoryBlogs(
     state: any,
     payload: {
