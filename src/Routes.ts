@@ -1,49 +1,41 @@
 import { createRouter, createWebHistory } from "vue-router";
-import NavBarVue from "./components/NavBar.vue";
-import HomePageVue from "./page/Home/HomePage.vue";
-import BlogPageVue from "./page/Blog/BlogPage.vue";
-import CategoryPageVue from "./page/Category/CategoryPage.vue";
-import AddBlogPageVue from "./page/Add Blog/AddBlogPage.vue";
-import LoginPageVue from "./page/Admin/LoginPage.vue";
-import AdminPageVue from "./page/Admin/AdminPage.vue";
-import AdminProtectedVue from "./page/Admin/AdminProtected.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      component: NavBarVue,
+      component: () => import("./components/NavBar.vue"),
       children: [
         {
           path: "/",
-          component: HomePageVue,
+          component: import("./page/Home/HomePage.vue"),
         },
         {
           path: "/blog/:slug",
-          component: BlogPageVue,
+          component: () => import("./page/Blog/BlogPage.vue"),
         },
         {
           path: "/category/:category",
-          component: CategoryPageVue,
+          component: () => import("./page/Category/CategoryPage.vue"),
         },
       ],
     },
     {
       path: "/admin",
-      component: AdminProtectedVue,
+      component: () => import("./page/Admin/AdminProtected.vue"),
       children: [
         {
           path: "/admin",
-          component: AdminPageVue,
+          component: () => import("./page/Admin/AdminPage.vue"),
         },
         {
           path: "/admin/login",
-          component: LoginPageVue,
+          component: () => import("./page/Admin/LoginPage.vue"),
         },
         {
           path: "/admin/addblog",
-          component: AddBlogPageVue,
+          component: () => import("./page/Add Blog/AddBlogPage.vue"),
         },
       ],
     },

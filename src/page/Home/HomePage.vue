@@ -1,11 +1,14 @@
 <script lang="ts" setup>
-import BlogCard from "../../components/BlogCard.vue";
+import { defineAsyncComponent } from "vue";
+const Blog = defineAsyncComponent(
+  () => import("../../components/BlogCard.vue")
+);
 </script>
 
 <template>
   <h2>{{ search }}</h2>
   <div class="flex flex-wrap px-[8%] py-10 gap-5">
-    <BlogCard :blogs="blogs_list" />
+    <Blog :blogs="blogs_list" />
   </div>
 </template>
 
@@ -17,7 +20,7 @@ export default {
   data() {
     return {
       search: "",
-      page: 1,
+      page: 0,
       totalBlogs: -1,
       limit: 6,
     } as {
@@ -48,15 +51,15 @@ export default {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_APP_API_URL}/blog/all?blogs=${
-            this.page * this.limit
-          }`
+            this.limit
+          }&page=${this.page}`
         );
         if (response.status == 200) {
           // Append newly fetched data to the existing data list
           this.totalBlogs = response.data.totalBlogs;
+          window.history.pushState(response.data.blogs, "Blogs", "/");
           // @ts-ignore
           this.$store.dispatch("blogs/setBlogs", response.data.blogs);
-          this.page++; // Increment page number for the next request
         } else {
           // @ts-ignore
           this.$store.dispatch("blogs/setBlogs", []);
@@ -65,27 +68,59 @@ export default {
         console.log(e);
       }
     },
+    async loadBlogs() {
+      if (this.totalBlogs == -1 || this.totalBlogs >= this.page * this.limit) {
+        this.page++;
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_APP_API_URL}/blog/all?blogs=${
+              this.limit
+            }&page=${this.page}`
+          );
+          if (response.status == 200) {
+            // Append newly fetched data to the existing data list
+            this.totalBlogs = response.data.totalBlogs;
+            // @ts-ignore
+            this.$store.dispatch("blogs/appendBlogs", response.data.blogs);
+          } else {
+            // @ts-ignore
+            this.$store.dispatch("blogs/setBlogs", []);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    },
   },
   mounted() {
+    const currentState = window.history.state;
+    const dataArray = Object.keys(currentState)
+      .filter((key) => !isNaN(parseInt(key))) // Filter out non-numeric keys
+      .map((key) => currentState[key]); // Map numerical keys to their corresponding objects
+
+    // @ts-ignore
+    this.$store.dispatch("blogs/setBlogs", dataArray);
+
     this.fetchBlogs();
     window.addEventListener("scroll", () => {
-      const offset = 100; // Adjust this value as needed
       const bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight + offset >=
-        document.documentElement.offsetHeight;
+        window.scrollY + window.innerHeight + 0.4 >=
+        document.documentElement.scrollHeight;
+      if (bottomOfWindow) {
+        alert(bottomOfWindow);
+      }
       if (bottomOfWindow && this.blogs_list.length < this.totalBlogs) {
-        this.fetchBlogs();
+        this.loadBlogs();
       }
     });
   },
   beforeDestroy() {
     window.removeEventListener("scroll", () => {
-      const offset = 100; // Adjust this value as needed
       const bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight + offset >=
-        document.documentElement.offsetHeight;
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight;
       if (bottomOfWindow && this.blogs_list.length < this.totalBlogs) {
-        this.fetchBlogs();
+        this.loadBlogs();
       }
     });
   },

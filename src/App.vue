@@ -1,9 +1,13 @@
-<script setup lang="ts"></script>
-
-<template><router-view></router-view></template>
-
-<script lang="ts">
-export default {
-
-};
+<script setup lang="ts">
+//@ts-ignore
+import vueTopprogress from "vue-top-progress";
 </script>
+
+<template>
+  <Suspense>
+    <template #default>
+      <router-view></router-view>
+    </template>
+    <template #fallback><h2>Loading</h2></template>
+  </Suspense>
+</template>
