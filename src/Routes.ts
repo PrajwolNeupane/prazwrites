@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import HomePageVue from "./page/Home/HomePage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -9,7 +10,7 @@ const router = createRouter({
       children: [
         {
           path: "/",
-          component: import("./page/Home/HomePage.vue"),
+          component: HomePageVue,
         },
         {
           path: "/blog/:slug",
