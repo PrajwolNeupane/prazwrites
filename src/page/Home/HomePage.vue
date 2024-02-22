@@ -97,18 +97,16 @@ export default {
     const dataArray = Object.keys(currentState)
       .filter((key) => !isNaN(parseInt(key))) // Filter out non-numeric keys
       .map((key) => currentState[key]); // Map numerical keys to their corresponding objects
-
-    // @ts-ignore
-    this.$store.dispatch("blogs/setBlogs", dataArray);
+    if (dataArray.length > 0) {
+      // @ts-ignore
+      this.$store.dispatch("blogs/setBlogs", dataArray);
+    }
 
     this.fetchBlogs();
     window.addEventListener("scroll", () => {
       const bottomOfWindow =
         window.scrollY + window.innerHeight + 0.4 >=
         document.documentElement.scrollHeight;
-      if (bottomOfWindow) {
-        alert(bottomOfWindow);
-      }
       if (bottomOfWindow && this.blogs_list.length < this.totalBlogs) {
         this.loadBlogs();
       }
